@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 require 'net/http'
 require 'json'
 require 'pp'
@@ -57,18 +49,23 @@ def retrieve_films_and_planets
       api_planet_url = api_planet['url'].sub! 'http', 'https'
 
       # Create object
-      planet_create = film_created.planets.find_or_create_by(
-        name: api_planet['name'],
-        climate: api_planet['climate'],
-        diameter: api_planet['diameter'],
-        gravity: api_planet['gravity'],
-        orbital_period: api_planet['orbital_period'],
-        population: api_planet['population'],
-        rotation_period: api_planet['rotation_period'],
-        surface_water: api_planet['surface_water'],
-        terrain: api_planet['terrain'],
-        url: api_planet_url
-      )
+      find_initial_planet = Planet.where(name: api_planet['name'])
+      if find_initial_planet.length == 0
+        planet_create = film_created.planets.find_or_create_by(
+          name: api_planet['name'],
+          climate: api_planet['climate'],
+          diameter: api_planet['diameter'],
+          gravity: api_planet['gravity'],
+          orbital_period: api_planet['orbital_period'],
+          population: api_planet['population'],
+          rotation_period: api_planet['rotation_period'],
+          surface_water: api_planet['surface_water'],
+          terrain: api_planet['terrain'],
+          url: api_planet_url
+        )
+      else
+        film_created.planets << find_initial_planet
+      end
 
     end
 
@@ -82,7 +79,7 @@ def retrieve_films_and_planets
 
       # #retrieve the planet from teh API and match it to the DB
       race_planet = Planet.new
-      if !api_races['homeworld'].nil?
+      if api_races['homeworld'].present?
         race_planet_url = api_races['homeworld'].sub! 'http', 'https'
         race_planet_data = get_data_url(race_planet_url)
         race_planet_data_url = race_planet_data['url'].sub! 'http', 'https'
@@ -98,6 +95,13 @@ def retrieve_films_and_planets
           terrain: race_planet_data['terrain'],
           url: race_planet_data_url
         )
+      else
+        race_planet = Planet.where(name: 'Unknown')[0]
+
+      end
+
+      find_initial_race = Race.where(name: api_races['name'])
+      if find_initial_race.length == 0
         race_create = film_created.races.find_or_create_by(
           name: api_races['name'],
           average_lifespan: api_races['average_lifespan'],
@@ -106,20 +110,11 @@ def retrieve_films_and_planets
           language: api_races['language'],
           url: api_races_url,
           planet: race_planet
-        )
+          )
       else
-        race_planet = Planet.where(name: 'Unknown')[0]
-
+        film_created.races << find_initial_race
       end
-      race_create = film_created.races.find_or_create_by(
-        name: api_races['name'],
-        average_lifespan: api_races['average_lifespan'],
-        classification: api_races['classification'],
-        designation: api_races['designation'],
-        language: api_races['language'],
-        url: api_races_url,
-        planet: race_planet
-        )
+
     end
 
     # RETRIEVE ALL CHARACTERS
@@ -218,18 +213,24 @@ def retrieve_films_and_planets
         character_race = Race.where(name: 'Unknown')[0]
       end
 
-      character_create = film_created.characters.find_or_create_by(
-              name: api_characters['name'],
-              birth_year: api_characters['birth_year'],
-              eye_color: api_characters['eye_color'],
-              gender: api_characters['gender'],
-              hair_color: api_characters['hair_color'],
-              height: api_characters['height'],
-              skin_color: api_characters['skin_color'],
-              url: api_characters_url,
-              planet: character_planet,
-              race: character_race
-            )
+        find_character = Character.where(name: api_characters['name'])
+        if find_character.length == 0
+          character_create = film_created.characters.find_or_create_by(
+                  name: api_characters['name'],
+                  birth_year: api_characters['birth_year'],
+                  eye_color: api_characters['eye_color'],
+                  gender: api_characters['gender'],
+                  hair_color: api_characters['hair_color'],
+                  height: api_characters['height'],
+                  skin_color: api_characters['skin_color'],
+                  url: api_characters_url,
+                  planet: character_planet,
+                  race: character_race
+                )
+        else
+          # puts find_character[0]
+          film_created.characters << find_character
+        end
       end
     puts single_movie['title'] + ' DONE'
   end
