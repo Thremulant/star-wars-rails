@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_14_045434) do
+ActiveRecord::Schema.define(version: 2021_03_14_045824) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,13 @@ ActiveRecord::Schema.define(version: 2021_03_14_045434) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "race_id", null: false
     t.integer "planet_id", null: false
+    t.string "birth_year"
+    t.string "eye_color"
+    t.string "gender"
+    t.string "hair_color"
+    t.string "height"
+    t.string "skin_color"
+    t.string "url"
     t.index ["planet_id"], name: "index_characters_on_planet_id"
     t.index ["race_id"], name: "index_characters_on_race_id"
   end
@@ -31,6 +38,12 @@ ActiveRecord::Schema.define(version: 2021_03_14_045434) do
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "opening_crawl"
+    t.string "producer"
+    t.date "release_date"
+    t.string "url"
+    t.integer "episode_id"
+    t.string "director"
   end
 
   create_table "films_planets", id: false, force: :cascade do |t|
@@ -47,6 +60,15 @@ ActiveRecord::Schema.define(version: 2021_03_14_045434) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "climate"
+    t.string "diameter"
+    t.integer "gravity"
+    t.integer "orbital_period"
+    t.integer "population"
+    t.integer "rotation_period"
+    t.integer "surface_water"
+    t.string "terrain"
+    t.string "url"
   end
 
   create_table "races", force: :cascade do |t|
@@ -54,6 +76,11 @@ ActiveRecord::Schema.define(version: 2021_03_14_045434) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "planet_id", null: false
+    t.integer "average_lifespan"
+    t.string "classification"
+    t.string "designation"
+    t.string "language"
+    t.string "url"
     t.index ["planet_id"], name: "index_races_on_planet_id"
   end
 

@@ -62,47 +62,42 @@ def main_data_retrieval()
         terrain: api_planet['terrain'],
         url: api_planet_url
       )
+
+      # single_movie['characters'].each do |single_character|
+      #   # Convert to HTTPS that works fine
+      #   single_character.sub! 'http', 'https'
+
+      #   # Retrieve all characters assocciated with the film
+      #   api_characters = get_data_url(single_character)
+      #   api_characters_url = api_characters['url'].sub! 'http', 'https'
+
+      #   # Create the objects
+      #   character_create = film_created.characters.find_or_create_by(
+        #     name: api_characters['name'],
+        #     birth_year: api_characters['birth_year'],
+        #     eye_color: api_characters['eye_color'],
+        #     gender: api_characters['gender'],
+        #     hair_color: api_characters['hair_color'],
+        #     height: api_characters['height'],
+        #     skin_color: api_characters['skin_color'],
+        #     url: api_characters_url
+        #   )
+        # end
+
     end
-
-    # single_movie['characters'].each do |single_character|
-    #   # Convert to HTTPS that works fine
-    #   single_character.sub! 'http', 'https'
-
-    #   # Retrieve all characters assocciated with the film
-    #   api_characters = get_data_url(single_character)
-    #   api_characters_url = api_characters['url'].sub! 'http', 'https'
-
-    #   # Create the objects
-    #   character_create = film_created.characters.find_or_create_by(
-    #     name: api_characters['name'],
-    #     birth_year: api_characters['birth_year'],
-    #     eye_color: api_characters['eye_color'],
-    #     gender: api_characters['gender'],
-    #     hair_color: api_characters['hair_color'],
-    #     height: api_characters['height'],
-    #     skin_color: api_characters['skin_color'],
-    #     url: api_characters_url
-    #   )
-    # end
-
-
-
-    # pp single_movie
-    # Find.find_or_create_by
-    # puts single_movie['title']
   end
 end
 
 # ------MAIN DATA RETRIEVAL-----
-# main_data_retrieval()
+main_data_retrieval()
 
 
 # ------TESTS-----
-first_film = Film.create(title: "Firt film")
-new_planet = first_film.planets.create(name:'jupiter')
-new_race = first_film.races.create(name:'titor', planet:new_planet)
-new_char = first_film.characters.create(name:'luke', race:new_race, planet:new_planet)
-puts new_char.errors.messages.inspect
+# first_film = Film.create(title: "Firt film")
+# new_planet = first_film.planets.create(name:'jupiter')
+# new_race = first_film.races.create(name:'titor', planet:new_planet)
+# new_char = first_film.characters.create(name:'luke', race:new_race, planet:new_planet)
+# puts new_char.errors.messages.inspect
 
 # puts new_planet.characters.first.name
 
