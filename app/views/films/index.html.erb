@@ -1,2 +1,18 @@
-<h1>Films#index</h1>
-<p>Find me in app/views/films/index.html.erb</p>
+<div class='container bg-dark'>
+  <h1 class="display-3 text-center text-warning">Star Wars moview</h1>
+</div>
+<div class="container">
+  <div class="row">
+    <% @films.each do |films| %>
+      <div class="card" style="width:18rem;">
+        <img src="" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= films.title %></h5>
+          <h6 class="card-subtitle mb-2 text-muted ">Card subtitle</h6>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          asdsad
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
