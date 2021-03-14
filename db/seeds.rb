@@ -24,11 +24,24 @@ def get_data_url(url)
   json_res = JSON.parse(res)
 end
 
+def get_film_image(film_name)
+    corrected_name = 'https://v2.sg.media-imdb.com/suggests/' + film_name[0,1].downcase + '/'+film_name.downcase.gsub!(' ', '-') + '.json'
+    uri = URI(corrected_name)
+    res = Net::HTTP.get(uri)
+    res.chop!
+    temp = res.slice(res.index("{")..-1)
+    film_data = JSON.parse(temp)
+    film_data['d'][0]['i'][0]
+end
+
 def retrieve_films_and_planets
   films_url = 'https://swapi.dev/api/films/'
   all_films = get_data_url(films_url)
 
   all_films['results'].each do |single_movie|
+
+    film_image = get_film_image(single_movie['title'])
+
     film_created = Film.find_or_create_by(
       title: single_movie['title'],
       episode_id: single_movie['episode_id'],
@@ -36,8 +49,13 @@ def retrieve_films_and_planets
       director: single_movie['director'],
       producer: single_movie['producer'],
       release_date: single_movie['release_date'],
-      url: single_movie['url']
+      url: single_movie['url'],
+      image: film_image
     )
+    # Add image to movie
+    # corrected_name = single_movie['title'].downcase.gsub!(' ', '-') + '.json'
+    # puts corrected_name
+    # film_image = get_data_url('a/')
 
     # ADD ALL PLANETS ASSOCCIATED WITH A MOVIE
     single_movie['planets'].each do |single_planet|
@@ -248,3 +266,6 @@ retrieve_films_and_planets
 # puts new_char.errors.messages.inspect
 
 # puts new_planet.characters.first.name
+# get_film_image('A new hope')
+
+
