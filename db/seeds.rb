@@ -13,7 +13,7 @@ require 'pp'
 Film.destroy_all
 Character.destroy_all
 Planet.destroy_all
-Species.destroy_all
+Race.destroy_all
 
 def get_data_url(url)
   uri = URI(url)
@@ -99,10 +99,10 @@ end
 
 # ------TESTS-----
 first_film = Film.create(title: "Firt film")
-# new_planet = first_film.planets.create(name:'jupiter')
-# new_specie = first_film.races.create(name:'titor', planet:new_planet)
-# new_char = first_film.characters.create(name:'luke', specie:new_specie, planet:new_planet)
-# puts new_char.errors.messages.inspect
+new_planet = first_film.planets.create(name:'jupiter')
+new_race = first_film.races.create(name:'titor', planet:new_planet)
+new_char = first_film.characters.create(name:'luke', race:new_race, planet:new_planet)
+puts new_char.errors.messages.inspect
 
 # puts new_planet.characters.first.name
 

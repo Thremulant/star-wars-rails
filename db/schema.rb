@@ -10,18 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_14_044030) do
+ActiveRecord::Schema.define(version: 2021_03_14_045434) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "race_id", null: false
+    t.integer "planet_id", null: false
+    t.index ["planet_id"], name: "index_characters_on_planet_id"
+    t.index ["race_id"], name: "index_characters_on_race_id"
+  end
+
+  create_table "characters_films", id: false, force: :cascade do |t|
+    t.integer "film_id", null: false
+    t.integer "character_id", null: false
   end
 
   create_table "films", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "films_planets", id: false, force: :cascade do |t|
+    t.integer "film_id", null: false
+    t.integer "planet_id", null: false
+  end
+
+  create_table "films_races", id: false, force: :cascade do |t|
+    t.integer "film_id", null: false
+    t.integer "race_id", null: false
   end
 
   create_table "planets", force: :cascade do |t|
@@ -34,6 +53,11 @@ ActiveRecord::Schema.define(version: 2021_03_14_044030) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "planet_id", null: false
+    t.index ["planet_id"], name: "index_races_on_planet_id"
   end
 
+  add_foreign_key "characters", "planets"
+  add_foreign_key "characters", "races"
+  add_foreign_key "races", "planets"
 end
