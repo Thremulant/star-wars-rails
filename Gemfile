@@ -60,5 +60,6 @@ gem 'bootstrap', '~> 5.0.0.beta2'
 
 gem 'jquery-rails'
 
-gem 'will_paginate', '~> 3.1.0'
-gem 'will_paginate-bootstrap'
+gem 'pagy', '~> 3.5'
+
+gem 'ransack'

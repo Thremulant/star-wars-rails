@@ -15,8 +15,8 @@
         <%end%>
       </p>
       <p class='text-light mb-1'><strong class='text-warning'>Planet: </strong>
-        <% if @planet.name == 'Unknown' %>
-          <%= @planet.name %>
+        <% if @planet.name == 'Unknown' || @planet.name == 'unknown' %>
+          <%= @planet.name.humanize %>
         <%else%>
           <%=link_to @planet.name, @planet%>
         <%end%>
