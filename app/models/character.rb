@@ -5,4 +5,9 @@ class Character < ApplicationRecord
 
   validates :name, presence: true
   validates_uniqueness_of :name
+
+  def self.search(search, page)
+    paginate :per_page => 10, :page => page,
+            :conditions => ['name like ?', "%#{search}%"], :order => 'name'
+  end
 end

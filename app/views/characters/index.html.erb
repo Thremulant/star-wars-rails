@@ -1,2 +1,31 @@
-<h1>Characters#index</h1>
-<p>Find me in app/views/characters/index.html.erb</p>
+<div class='container'>
+  <div class='row'>
+    <h6 class="display-6 text-warning p-0">Characters</h5>
+  </div>
+</div>
+<div class='container'>
+  <div class='row'>
+    <% form_tag characters_path, :method => 'get' do %>
+      <% content_tag :label do %>
+        Search term:
+        <%= text_field_tag :search, params[:search] %>
+      <% end %>
+    <% end %>
+    <%# <form>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Character's name" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-outline-warning" type="button" id="button-addon2">Button</button>
+      </div>
+    </form> %>
+  </div>
+  <div class='row'>
+    <div class="col">
+      <ul class="list-group">
+        <% @characters.each do |char| %>
+          <li class="list-group-item"><%= link_to char.name, char, class:"link-dark" %></li>
+        <% end %>
+      </ul>
+      <%= will_paginate @characters %>
+    </div>
+  </div>
+</div>
