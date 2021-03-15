@@ -15,7 +15,7 @@ Additionally, I wanted to add some images. But there are no APIs that hold the i
 Even so I found that I could use [IMDB's API](https://v2.sg.media-imdb.com/suggests/) to get the movies and the posters. That's what's being use to pull those images.
 
 ## ERD
-![ERD for Star Wars on Rails](https://ibb.co/d79Jgnq "ERD for Star Wars on Rails")
+[![star-wars-erd.jpg](https://i.postimg.cc/MZM8RdCG/star-wars-erd.jpg)](https://postimg.cc/6TXSxL5s)
 
 
 ## Sidenote
