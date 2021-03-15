@@ -8,15 +8,15 @@
     <div class="col-md-4 col-sm-12 ">
       <h1 class="display-6 text-warning p-0">Information</h1>
       <p class='text-light mb-1'><strong class='text-warning'>Homeworld: </strong>
-        <% if @planet.name == 'Unknown' %>
-          <%= @planet.name %>
+        <% if @planet.name == 'Unknown' || @planet.name == 'unknown' %>
+          <%= @planet.name.humanize %>
         <%else%>
           <%=link_to @planet.name, @planet%>
         <%end%>
       </p>
-      <p class='text-light mb-1'><strong class='text-warning'>Classification: </strong><%=@race.classification%></p>
-      <p class='text-light mb-1'><strong class='text-warning'>Designation: </strong><%=@race.designation%></p>
-      <p class='text-light mb-1'><strong class='text-warning'>Language: </strong><%=@race.language%></p>
+      <p class='text-light mb-1'><strong class='text-warning'>Classification: </strong><%=@race.classification.humanize%></p>
+      <p class='text-light mb-1'><strong class='text-warning'>Designation: </strong><%=@race.designation.humanize%></p>
+      <p class='text-light mb-1'><strong class='text-warning'>Language: </strong><%=@race.language.humanize%></p>
       <p class='text-light mb-1'><strong class='text-warning'>Average lifespan: </strong><%=@race.average_lifespan%></p>
     </div>
     <% if @characters.length > 0 then%>

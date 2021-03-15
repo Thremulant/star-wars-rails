@@ -1,6 +1,7 @@
 class RacesController < ApplicationController
   def index
-    @races = Race.all
+    @q = Race.where.not(name: 'Unknown').ransack(params[:q])
+    @pagy, @races = pagy(@q.result, items: 10)
   end
 
   def show
