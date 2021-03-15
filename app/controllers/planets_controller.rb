@@ -1,6 +1,7 @@
 class PlanetsController < ApplicationController
   def index
-    @planets = Planet.all
+    @q = Planet.where.not(name: 'Unknown').ransack(params[:q])
+    @pagy, @planets = pagy(@q.result, items: 10)
   end
 
   def show
