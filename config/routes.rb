@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   get '/characters', to: 'characters#index'
   get '/species', to: 'species#index'
   get '/planets', to: 'planets#index'
+
+  resources :films, :characters, :planets, :races
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

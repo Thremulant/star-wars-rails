@@ -1,0 +1,46 @@
+<div class="container mb-4">
+  <div class="row">
+    <div class="col-3">
+      <img src='<%= @film.image %>' class='img-fluid'/>
+    </div>
+    <div class="col-md ">
+      <span class="badge rounded-pill bg-warning text-dark">EPISODE <%= @film.episode_id%></span>
+      <h1 class="display-4 text-warning p-0">
+        <%= @film.title %>
+      </h1>
+      <p class='text-light mb-1'><strong class='text-warning'>Director: </strong><%=@film.director%></p>
+      <p class='text-light mb-1'><strong class='text-warning'>Producer: </strong><%=@film.producer%></p>
+      <p class='text-light mb-1'><strong class='text-warning'>Release date: </strong><%=@film.release_date%></p>
+      <p class='text-light mb-1'><strong class='text-warning'>Opening: </strong></p>
+      <p class='text-light mb-1'><%=@film.opening_crawl%></p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class='col-4'>
+      <h6 class="display-6 text-warning p-0">Characters</h5>
+      <ul class="list-group">
+        <% @characters.each do |char| %>
+          <li class="list-group-item"><%= link_to char.name, char, class:"link-dark" %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class='col-4'>
+      <h6 class="display-6 text-warning p-0">Races</h5>
+      <ul class="list-group">
+        <% @races.each do |race| %>
+          <li class="list-group-item"><%= link_to race.name, race, class:"link-dark" %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class='col-4'>
+      <h6 class="display-6 text-warning p-0">Planets</h5>
+      <ul class="list-group">
+        <% @planets.each do |planet| %>
+          <li class="list-group-item"><%= link_to planet.name, planet, class:"link-dark" %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

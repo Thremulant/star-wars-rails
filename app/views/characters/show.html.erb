@@ -1,0 +1,49 @@
+<div class="container mb-4">
+  <div class="row">
+    <h1 class="display-4 text-warning p-0 col-12">
+      <%= @character.name %>
+    </h1>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-sm-12 ">
+      <h1 class="display-6 text-warning p-0">Information</h1>
+      <p class='text-light mb-1'><strong class='text-warning'>Specie: </strong>
+        <% if @race.name == 'Unknown' %>
+          <%= @race.name %>
+        <%else%>
+          <%=link_to @race.name, @race%>
+        <%end%>
+      </p>
+      <p class='text-light mb-1'><strong class='text-warning'>Planet: </strong>
+        <% if @planet.name == 'Unknown' %>
+          <%= @planet.name %>
+        <%else%>
+          <%=link_to @planet.name, @planet%>
+        <%end%>
+      </p>
+      <p class='text-light mb-1'><strong class='text-warning'>Birth year: </strong><%=@character.birth_year%></p>
+      <p class='text-light mb-1'><strong class='text-warning'>Gender: </strong><%=@character.gender.humanize%></p>
+      <p class='text-light mb-1'><strong class='text-warning'>Height: </strong><%=@character.height%></p>
+      <p class='text-light mb-1'><strong class='text-warning'>Skin color: </strong><%=@character.skin_color.humanize%></p>
+      <p class='text-light mb-1'><strong class='text-warning'>Eye color: </strong><%=@character.eye_color.humanize%></p>
+    </div>
+    <div class="col-md-8  col-sm-12">
+      <h1 class="display-6 text-warning p-0">Films</h1>
+      <div class="row">
+        <% @films.each do |film| %>
+          <div class="col-md-6 col-lg-4 ">
+            <div class="card mb-4" >
+              <a href="<%= film_path(film) %>" class="link-dark">
+                <img src="<%= film.image %>" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><%= film.title %></h5>
+                  <%# <h6 class="card-subtitle mb-2 text-muted ">Card subtitle</h6> %>
+                </div>
+              </a>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
